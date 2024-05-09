@@ -1,0 +1,24 @@
+<h1> Edit Product</h1>
+<form action="/product/save" method="post">
+<input type="hidden" name="Product_ID" value="<%= onerec.Product_ID %>" >
+<table>
+<tr> <td> Product ID: </td> <td> <input type="text" name="productname" value="<%= onerec.Product_ID %>" required> </td> </tr>
+<tr> <td> Supplier ID: </td> <td> <input type="text" name="prodimage" value="<%= onerec.Supplier %>" required> </td> </tr>
+<tr> <td> Product Naame: </td> <td> <textarea name="text" rows="10" cols="30"><%= onerec.Productname %></textarea> </td> </tr>
+<tr> <td> Item Sold: </td> <td> <textarea name="text" rows="10" cols="30"><%= onerec.ItemSold %></textarea> </td> </tr>
+<tr> <td> Retail Price: </td> <td> <input type="text" name="duration" value="<%= onerec.RetailPrice %>" required> </td> </tr>
+<tr> <td> Packaging: </td> <td> <input type="text" name="country" value="<%= onerec.Packaging %>" required> </td> </tr>
+<tr> <td> Is Discontinued: </td> <td> <input type="text" name="IsDiscontinued" value="<%= onerec.IsDiscontinued %>" required> </td> </tr>
+<!-- <tr> <td> Ending City: </td> <td> <input type="text" name="endcity" value="<%= onerec.endcity %>" required> </td> </tr>
+<tr> <td> Supplier ID: </td> <td> <input type="number" name="supplier_id" value="<%= onerec.supplier_id %>" required> </td> </tr>
+<tr> <td> Category ID: </td> <td> <input type="number" name="category_id" value="<%= onerec.category_id %>" required> </td> </tr>
+<tr> <td> Price: </td> <td> <input type="text" name="saleprice" value="<%= onerec.saleprice %>" required> </td> </tr>
+<tr> <td> Status: </td> <td> <select name="status" required> -->
+        <!-- <option selected><%= onerec.status %></option>
+        <option>Available</option>
+        <option>Contingent</option>
+        <option>Coming Soon</option>
+        </select> </td> </tr> -->
+    </table>
+        <button type="submit">Save</button>
+</form>
