@@ -34,7 +34,7 @@ var privacyRouter = require('./routes/privacy');
 var helpRouter = require('./routes/help');
 var productRouter = require('./routes/product');
 var supplyRouter = require('./routes/supply');
-// var customersRouter = require('./routes/customers');
+var customerRouter = require('./routes/customer');
 // var AutoPartOrdersRouter = require('./routes/AutoPartOrder');
 // var OrderLineItemsRouter = require('./routes/OrderLineItem');
 var app = express();
@@ -58,7 +58,7 @@ app.use('/privacy', privacyRouter);
 app.use('/help', helpRouter);
 app.use('/product',productRouter);
 app.use('/supply',supplyRouter);
-// app.use('/customer',customersRouter);
+app.use('/customer',customerRouter);
 // app.use('/AutoPartOrder',AutoPartOrdersRouter);
 // app.use('/OrderLineItem',OrderLineItemsRouter);
 
