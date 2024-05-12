@@ -1,0 +1,11 @@
+<h1> Edit Product</h1>
+<form action="/order/save" method="post">
+<input type="hidden" name="OrderNumber" value="<%= onerec.OrderNumber %>" >
+<table>
+    <tr> <td> Order Number: </td> <td> <input type="number" name="OrderNumber" value="<%= onerec.OrderNumber %>" required> </td> </tr>
+    <tr> <td> Customer ID: </td> <td> <input type="number" name="Customer_ID" value="<%= onerec.Customer_ID %>" required> </td> </tr>
+    <tr> <td> Time: </td> <td> <input type="date" name="Time" value="<%= onerec.Time %>" required> </td> </tr>
+    <tr> <td> Total Amount: </td> <td> <input type="number" name="TotalAmount" value="<%= onerec.TotalAmount %>" required> </td> </tr>
+    </table>
+        <button type="submit">Save</button>
+</form>

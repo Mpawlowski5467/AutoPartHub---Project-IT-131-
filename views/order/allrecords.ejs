@@ -1,0 +1,27 @@
+<% if (allrecs.length > 0) {%>
+    <table>
+        <tr>
+            <th> Order Number </th>
+            <th> Customer ID </th>
+            <th> Time </th>
+            <th> Total Amount </th>
+        </tr>
+    <% allrecs.forEach((recref, index) => { %>
+    <tr>
+            <td><%= recref.OrderNumber %></td>
+            <td><%= recref.Customer_ID %></td>
+            <td><%= recref.Time %></td>
+            <td><%= recref.TotalAmount %></td>
+
+        
+        <td><a href='/order/<%= recref.OrderNumber %>/show'> Details</a></td>
+        <td><a href='/order/<%= recref.OrderNumber %>/edit'>Edit</a> 
+        </td><td><a href='/order/<%= recref.OrderNumber %>/delete' onclick="return confirm('Are you sure you want to delete this record?');">Delete</a></td>
+    </tr>
+    <% }); %>
+    </table>
+    <% } else { %>
+    <p>Not Records Available</p>
+    <% } %>
+    <p> <a href='/order/addrecord'>Add New</a> </p>
+    
