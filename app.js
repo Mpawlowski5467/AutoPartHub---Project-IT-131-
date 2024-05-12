@@ -35,8 +35,8 @@ var helpRouter = require('./routes/help');
 var productRouter = require('./routes/product');
 var supplyRouter = require('./routes/supply');
 var customerRouter = require('./routes/customer');
-// var AutoPartOrdersRouter = require('./routes/AutoPartOrder');
-// var OrderLineItemsRouter = require('./routes/OrderLineItem');
+var orderRouter = require('./routes/order');
+var OrderLineItemsRouter = require('./routes/orderline');
 var app = express();
 
 // view engine setup
@@ -59,8 +59,8 @@ app.use('/help', helpRouter);
 app.use('/product',productRouter);
 app.use('/supply',supplyRouter);
 app.use('/customer',customerRouter);
-// app.use('/AutoPartOrder',AutoPartOrdersRouter);
-// app.use('/OrderLineItem',OrderLineItemsRouter);
+app.use('/order',orderRouter);
+app.use('/orderline',OrderLineItemsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
