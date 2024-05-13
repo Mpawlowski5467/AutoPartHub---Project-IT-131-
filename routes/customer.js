@@ -86,7 +86,7 @@ router.get('/:recordid/edit', function(req, res, next) {
 router.post('/save', function(req, res, next) {
         let updatequery = "UPDATE customers SET  FirstName = ?,  LastName= ?,Address1 = ?, Address2 = ?, City = ?,State= ?,Zip= ?,Country= ?,Email= ?,PhoneNumber= ?,Username= ?,Password=? WHERE ID = " + req.body.ID;
         
-        db.query(updatequery,[   req.body.FirstName, req.body.LastName, req.body.Address1, req.body.Address2, req.body.City, req.body.State, req.body.Zip, req.body.Email, req.body.PhoneNumber, req.body.Username, req.body.Password ],(err, result) => {if (err) {
+        db.query(updatequery,[   req.body.FirstName, req.body.LastName, req.body.Address1, req.body.Address2, req.body.City, req.body.State, req.body.Zip, req.body.Country, req.body.Email, req.body.PhoneNumber, req.body.Username, req.body.Password ],(err, result) => {if (err) {
         console.log(err);
         res.render('error');
         } else {

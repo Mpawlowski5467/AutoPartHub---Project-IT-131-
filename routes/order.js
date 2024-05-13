@@ -80,8 +80,8 @@ router.get('/:recordid/edit', function(req, res, next) {
 // Route to save edited data in database.
 // ==================================================
 router.post('/save', function(req, res, next) {
-    let updatequery = "UPDATE AutoPartOrders SET OrderNumber=?, Customer_ID=?,Time=? ,TotalAmount = ?" + req.body.OrderNumber;
-    
+    let updatequery = "UPDATE AutoPartOrders SET OrderNumber=?, Customer_ID=?,Time=? ,TotalAmount = ? WHERE OrderNumber = " + req.body.OrderNumber;
+        
     db.query(updatequery,[ req.body.OrderNumber,req.body.Customer_ID,req.body.Time,req.body.TotalAmount ],(err, result) => {
     if (err) {
     console.log(err);

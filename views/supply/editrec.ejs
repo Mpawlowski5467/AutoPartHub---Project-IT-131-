@@ -2,12 +2,11 @@
 <form action="/supply/save" method="post">
 <input type="hidden" name="Supplier_ID" value="<%= onerec.Supplier_ID %>" >
 <table>
-<tr> <td> Supplier ID: </td> <td> <input type="text" name="productname" value="<%= onerec.Supplier_ID %>" required> </td> </tr>
-<tr> <td> Company Name: </td> <td> <input type="text" name="prodimage" value="<%= onerec.CompanyName %>" required> </td> </tr>
-<tr> <td> Contact Name: </td> <td> <textarea name="text" rows="10" cols="30"><%= onerec.ContactName %></textarea> </td> </tr>
-<tr> <td> City: </td> <td> <textarea name="text" rows="10" cols="30"><%= onerec.City %></textarea> </td> </tr>
-<tr> <td> Country: </td> <td> <input type="text" name="duration" value="<%= onerec.Country %>" required> </td> </tr>
-<tr> <td> Phone Number: </td> <td> <input type="text" name="country" value="<%= onerec.Phonenumber %>" required> </td> </tr>
+<tr> <td> Company Name: </td> <td> <input type="text" name="CompanyName" value="<%= onerec.CompanyName %>" required> </td> </tr>
+<tr> <td> Contact Name: </td> <td> <input type="text" name="ContactName" value="<%= onerec.ContactName %>" required> </td> </tr>
+<tr> <td> City: </td> <td> <input type="text" name="City" value="<%= onerec.City %>" required> </td> </tr>
+<tr> <td> Country: </td> <td> <input type="text" name="Country" value="<%= onerec.Country %>" required> </td> </tr>
+<tr> <td> Phone Number: </td> <td> <input type="text" name="Phonenumber" value="<%= onerec.Phonenumber %>" required> </td> </tr>
     </table>
         <button type="submit">Save</button>
 </form>
