@@ -1,9 +1,20 @@
 <p>We offer a large comprehensive selection of car parts/accessories for customers that DIY mechanics. With the focus on quality, reliability, and affordability.
    AutoPartHub what customers to feel empowered to be able to customize and enhance their vehicles to reflect their unique style and performance.  </p>
  <hr>
- <p> Current Time is <%= currenttime %> </p>
- <br> Here is the data passed from the program: </br> 
-          <%= passeddata %>
+ <% if (allrecs.length > 0) {%>
+  <% allrecs.forEach((recref, index) => { %>
+    <product>
+      <table> 
+          <tr>	<td colspan="2"><%= recref.Productname %></td></tr>
+          <tr>	<td colspan="2"><%= recref.RetailPrice %></td></tr>
+          <tr>	<td><%= recref.Product_ID %> </td> <td><%= recref.Supplier_ID %></td> </tr>
+          <tr>	<td><%= recref.ItemSold %> </td> <td><%= recref.Packaging %></td> </tr>
+          <tr>	<td><%= recref.IsDiscontinued %></td>
+            <td> <a href='/product/<%= recref.Product_ID %>/show'>Details</a>
+      </table>
+    </product>
+<% }); %>
+<% } %>
 </p>
 <footer>
     

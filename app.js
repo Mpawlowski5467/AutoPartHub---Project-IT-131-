@@ -37,6 +37,7 @@ var supplyRouter = require('./routes/supply');
 var customerRouter = require('./routes/customer');
 var orderRouter = require('./routes/order');
 var OrderLineItemsRouter = require('./routes/orderline');
+var searchRouter = require('./routes/search');
 var app = express();
 
 // view engine setup
@@ -61,6 +62,7 @@ app.use('/supply',supplyRouter);
 app.use('/customer',customerRouter);
 app.use('/order',orderRouter);
 app.use('/orderline',OrderLineItemsRouter);
+app.use('/search', searchRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

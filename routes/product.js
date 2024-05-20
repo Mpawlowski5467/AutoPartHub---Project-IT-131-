@@ -5,7 +5,7 @@ var router = express.Router();
 // URL: http://localhost:3026/ProductInfo/
 // ==================================================
 router.get('/', function(req, res, next) {
-let query = "SELECT Product_ID, Supplier_ID, ProductName, ItemSold, RetailPrice, Packaging  FROM ProductInfo";
+let query = "SELECT Product_ID, Supplier_ID, Productname, ItemSold, RetailPrice, Packaging, homepage  FROM ProductInfo";
 // execute query
 
 
@@ -24,7 +24,7 @@ res.render('product/allrecords', {allrecs: result });
 // Route to view one specific record. Notice the view is one record
 // ==================================================
 router.get('/:recordid/show', function(req, res, next) {
-        let query = "SELECT Product_ID, Supplier_ID, Productname , ItemSold , RetailPrice , Packaging , IsDiscontinued FROM ProductInfo WHERE Product_ID = " + req.params.recordid;
+        let query = "SELECT Product_ID, Supplier_ID, Productname , ItemSold , RetailPrice , Packaging , IsDiscontinued, homepage FROM ProductInfo WHERE Product_ID = " + req.params.recordid;
         // execute query
         db.query(query, (err, result) => {
         if (err) {
@@ -50,10 +50,17 @@ router.get('/addrecord', function(req, res, next) {
 // Route to obtain user input and save in database.
 // ==================================================
 router.post('/', function(req, res, next) {
-        let insertquery = "INSERT INTO ProductInfo ( Product_ID, Supplier_ID, Productname , ItemSold , RetailPrice , Packaging , IsDiscontinued) VALUES(?, ?, ?, ?, ?, ?, ?)";
+
+        var homepage_value=0;
+	if (req.body.homepage)
+		{
+			homepage_value = 1;
+		}
+
+        let insertquery = "INSERT INTO ProductInfo ( Product_ID, Supplier_ID, Productname , ItemSold , RetailPrice , Packaging , IsDiscontinued, homepage) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         
         db.query(insertquery,[req.body.Product_ID, req.body.Supplier_ID, req.body.Productname, req.body.ItemSold,
-         req.body.RetailPrice, req.body.Packaging, req.body.IsDiscontinued],(err, result) => {
+         req.body.RetailPrice, req.body.Packaging, req.body.IsDiscontinued, homepage_value],(err, result) => {
                         if (err) {
                                         console.log(err);
                                         res.render('error');
@@ -67,7 +74,7 @@ router.post('/', function(req, res, next) {
 // Route to edit one specific record.
 // ==================================================
 router.get('/:recordid/edit', function(req, res, next) {
-        let query = "SELECT Product_ID, Supplier_ID, Productname , ItemSold , RetailPrice , Packaging , IsDiscontinued FROM ProductInfo WHERE Product_ID = " + req.params.recordid;
+        let query = "SELECT Product_ID, Supplier_ID, Productname , ItemSold , RetailPrice , Packaging , IsDiscontinued, homepage FROM ProductInfo WHERE Product_ID = " + req.params.recordid;
         // execute query
                 db.query(query, (err, result) => {
                         if (err) {
@@ -85,9 +92,16 @@ router.get('/:recordid/edit', function(req, res, next) {
 // Route to save edited data in database.
 // ==================================================
 router.post('/save', function(req, res, next) {
-        let updatequery = "UPDATE ProductInfo SET Product_ID = ?, Supplier_ID = ?,  ItemSold= ?,RetailPrice = ?, Packaging = ?, IsDiscontinued = ? WHERE Product_ID = " + req.body.Product_ID;
+
+
+        var homepage_value=0;
+        if (req.body.homepage)
+        {
+        homepage_value = 1;
+        }     
+        let updatequery = "UPDATE ProductInfo SET Supplier_ID =?, Productname = ?,ItemSold = ?,RetailPrice = ?, Packaging = ?, homepage = ?   WHERE Product_ID = " + req.body.Product_ID;
         
-        db.query(updatequery,[req.body.Product_ID, req.body.Supplier_ID, req.body.ItemSold, req.body.RetailPrice, req.body.Packaging, req.body.IsDiscontinued ],(err, result) => {
+        db.query(updatequery,[ req.body.Supplier_ID,req.body.Productname,req.body.ItemSold, req.body.RetailPrice, req.body.Packaging, homepage_value ],(err, result) => {
         if (err) {
         console.log(err);
         res.render('error');
