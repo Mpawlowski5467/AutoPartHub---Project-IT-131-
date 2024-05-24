@@ -8,10 +8,11 @@
     <tr>	<td><%= recref.Product_ID %> </td> <td><%= recref.Supplier_ID %></td> </tr>
     <tr>	<td><%= recref.ItemSold %> </td> <td><%= recref.Packaging %></td> </tr>
     <tr>	<td><%= recref.IsDiscontinued %></td>
-<td><a href='/product/<%= recref.Product_ID>/show'>Details</a></td></tr>
+<td><a href='/product/<%= recref.Product_ID %>/show'>Details</a></td></tr>
 </table>
 </product>
 <% }); %>
 <% } else { %>
 <p>Not Records Available</p>
 <% } %>
+
