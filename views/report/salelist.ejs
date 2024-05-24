@@ -1,0 +1,28 @@
+<% if (allrecs.length > 0) {%>
+    <table border=1>
+        <tr>
+            <th> Order Number </th>
+            <th> First Name </th>
+            <th> Last Name  </th>
+            <th> Time Sold </th>
+            <th> Product Name  </th>
+            <th> Sale Price </th>
+            <th> Qty</th>
+        </tr>
+    <% allrecs.forEach((recref, index) => { %>
+    <tr>
+        <td><%= recref.OrderNumber %></td>
+        <td><%= recref.FirstName %></td>
+        <td><%= recref.LastName %></td>
+        <td><%= recref.Time.toLocaleDateString('en-US') %></td>
+        <td><%= recref.Productname %></td>
+        <td><%= recref.SalePrice %></td>
+        <td><%= recref.Qty %></td>
+    </tr>
+    <% }); %>
+    </table>
+    <% } else { %>
+    <p>Not Records Available</p>
+    <% } %>
+
+    
