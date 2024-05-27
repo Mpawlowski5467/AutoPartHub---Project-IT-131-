@@ -1,0 +1,39 @@
+<% var totprice = 0 %>
+<% var totqty = 0 %>
+<% var lineitemcost = 0 %>
+<% if (cartitems != '0') {%>
+<p> Here products selected in your cart: </p>
+<table border=1>
+<tr>
+<th>Product Name</th>
+<th>Item Sold</th>
+<th>Price</th>
+<th>Packaging</th>
+</tr>
+<% cartitems.forEach((item, index) => { %>
+<tr>
+    <td><%= item.ProductName %></td>
+    <td><%= item.ItemSold %></td>
+    <td><%= item.RetailPrice %></td>
+    <td><%= item.Packaging %></td>
+<% totqty = totqty + parseInt(qtys[index]) %>
+<% lineitemcost = item.RetailPrice * parseInt(qtys[index]) %>
+    <td><%= qtys[index] %> </td>
+    <td><%= lineitemcost %> </td>
+<% totprice = totprice + lineitemcost %>
+        <td><form action="/catalog/remove" method="post" >
+        <input type="hidden" name="Product_ID" value=<%= item.Product_ID %> >
+            <button type="submit">Remove</button>
+</form></td>
+</tr>
+<% }); %>
+<tr bgcolor="yellow" >
+    <td colspan="4"><b>Totals</b></td>
+    <td><%= totqty %></td>
+    <td><%= totprice %></td>
+        <td><button class='button1' onclick="window.location.href='/catalog/checkout'">Checkout</button></td>
+</tr>
+</table>
+<% } else { %>
+<p>Cart Is Empty</p>
+<% } %>
