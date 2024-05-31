@@ -65,4 +65,22 @@ router.get('/cart', function(req, res, next) {
     }
  });
 
+
+
+ // ==================================================
+// Route to remove an item from the cart
+// URL: http://localhost:3002/catalog/remove
+// ==================================================
+router.post('/remove', function(req, res, next) {
+    // Find the element index of the auto_id that needs to be removed
+  var n = req.session.cart.indexOf(req.body.Product_ID);
+  
+  // Remove element from cart and quantity arrays
+  req.session.cart.splice(n,1);
+  req.session.qty.splice(n,1);
+
+     res.redirect('/catalog/cart');
+
+});
+
 module.exports = router;
