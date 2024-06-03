@@ -69,7 +69,6 @@ router.get('/cart', function(req, res, next) {
 
  // ==================================================
 // Route to remove an item from the cart
-// URL: http://localhost:3002/catalog/remove
 // ==================================================
 router.post('/remove', function(req, res, next) {
     // Find the element index of the auto_id that needs to be removed
@@ -83,4 +82,46 @@ router.post('/remove', function(req, res, next) {
 
 });
 
+
+
+
+
+// ==================================================
+// Route save cart items to SALEORDER and ORDERDETAILS tables
+// ==================================================
+router.get('/checkout', function(req, res, next) {
+	var proditemprice = 0;
+	// Check to make sure the customer has logged-in
+	if (typeof req.session.ID !== 'undefined' && req.session.ID ) {
+		// Save SALEORDER Record:
+		let insertquery = "INSERT INTO AutoPartOrders ( OrderNumber ,Customer_ID, Time, TotalAmount) VALUES (?, ?, now(), 'Paid')"; 
+		db.query(insertquery,[req.session.Customer_ID],(err, result) => {
+			if (err) {
+				console.log(err);
+				res.render('error');
+			} else {
+				// Obtain the order_id value of the newly created SALEORDER Record
+				var order_id = result.insertId;
+				// Save ORDERDETAIL Records
+				// There could be one or more items in the shopping cart
+				req.session.cart.forEach((cartitem, index) => { 
+					// Perform ORDERDETAIL table insert
+					let insertquery = "INSERT INTO OrderLineItems (LineItemID, OrderNumber, Product_ID, Qty, SalePrice) VALUES (?, ?, ?, ?, (SELECT RetailPrice from ProductInfo where Product_ID = " + cartitem + "))";
+					db.query(insertquery,[order_id, cartitem, req.session.qty[index]],(err, result) => {
+						if (err) {res.render('error');}
+					});
+				});
+				// Empty out the items from the cart and quantity arrays
+				req.session.cart = [];
+				req.session.qty = [];
+				// Display confirmation page
+				res.render('checkout', {ordernum: order_id });
+				}		
+			});
+	}
+	else {
+		// Prompt customer to login
+		res.redirect('/customer/login');
+	}
+});
 module.exports = router;
