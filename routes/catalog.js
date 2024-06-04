@@ -65,9 +65,7 @@ router.get('/cart', function(req, res, next) {
     }
  });
 
-
-
- // ==================================================
+// ==================================================
 // Route to remove an item from the cart
 // ==================================================
 router.post('/remove', function(req, res, next) {
@@ -82,10 +80,6 @@ router.post('/remove', function(req, res, next) {
 
 });
 
-
-
-
-
 // ==================================================
 // Route save cart items to SALEORDER and ORDERDETAILS tables
 // ==================================================
@@ -94,8 +88,8 @@ router.get('/checkout', function(req, res, next) {
 	// Check to make sure the customer has logged-in
 	if (typeof req.session.ID !== 'undefined' && req.session.ID ) {
 		// Save SALEORDER Record:
-		let insertquery = "INSERT INTO AutoPartOrders ( OrderNumber ,Customer_ID, Time, TotalAmount) VALUES (?, ?, now(), 'Paid')"; 
-		db.query(insertquery,[req.session.Customer_ID],(err, result) => {
+		let insertquery = "INSERT INTO AutoPartOrders ( Customer_ID, Time, TotalAmount) VALUES (?, now(), 0.0 )"; 
+		db.query(insertquery,[req.session.ID],(err, result) => {
 			if (err) {
 				console.log(err);
 				res.render('error');
@@ -106,9 +100,11 @@ router.get('/checkout', function(req, res, next) {
 				// There could be one or more items in the shopping cart
 				req.session.cart.forEach((cartitem, index) => { 
 					// Perform ORDERDETAIL table insert
-					let insertquery = "INSERT INTO OrderLineItems (LineItemID, OrderNumber, Product_ID, Qty, SalePrice) VALUES (?, ?, ?, ?, (SELECT RetailPrice from ProductInfo where Product_ID = " + cartitem + "))";
+					let insertquery = "INSERT INTO OrderLineItems (OrderNumber, Product_ID, Qty, SalePrice) VALUES (?, ?, ?, (SELECT RetailPrice from ProductInfo where Product_ID = " + cartitem + "))";
 					db.query(insertquery,[order_id, cartitem, req.session.qty[index]],(err, result) => {
-						if (err) {res.render('error');}
+						if (err) {
+                            console.log(err);
+                            res.render('error');}
 					});
 				});
 				// Empty out the items from the cart and quantity arrays
